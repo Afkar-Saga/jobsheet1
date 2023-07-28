@@ -6,7 +6,7 @@ class Tebak:
     self.jawaban = random.randint(self.start, self.limit)
     self.tebakan = 0
     self.tries = 0
-    self.guessLimit = int(1 + math.floor(math.sqrt(self.limit - self.start) ** 0.7))
+    self.guessLimit = int(1 + math.floor(math.log(self.limit - self.start)))
     
   def cek(self):
     if self.tebakan == self.jawaban:
