@@ -1,4 +1,4 @@
-import random
+import random, math
 class Tebak:
   def __init__(self):
     self.start = int(input("Mau dari berapa? "))
@@ -6,6 +6,7 @@ class Tebak:
     self.jawaban = random.randint(self.start, self.limit)
     self.tebakan = 0
     self.tries = 0
+    self.guessLimit = int(1 + math.floor(math.sqrt(self.limit - self.start) ** 0.7))
     
   def cek(self):
     if self.tebakan == self.jawaban:
@@ -30,11 +31,17 @@ class Tebak:
     else:
       print("Jawabannya lebih kecil")
   
+  def batasNebak(self):
+    print("Sisa tebakan:", self.guessLimit)
+    self.guessLimit -= 1
+    if self.guessLimit < 0:
+      return True
   
   def main(self):
+    rewards = ["🎈", "🍕", "🍬", "🍭", "🚲", "❤", "👍", "🤞", "🛵", "🚗", "🍦", "🍫"]
     self.tebakan = int(input("Tebak angka {0} sampai {1}: ".format(self.start, self.limit)))
     if self.cek():
-      print("Jawaban Anda BENAR!!")
+      print("Jawaban Anda BENAR!! Hadiahnya --> ", random.choice(rewards))
     else:
       print("Jawaban Anda SALAH!!")
       self.tries += 1
@@ -48,4 +55,9 @@ class Tebak:
         self.cekGenap()
       else:
         self.cekBesar(self.tebakan)
+        
+      if self.batasNebak():
+        print("Sisa Tebakan Habis!\nAnda Hampir Menang..")
+        return False
+      
       self.main()
