@@ -58,6 +58,7 @@ class Tebak:
         
       if self.batasNebak():
         print("Sisa Tebakan Habis!\nAnda Hampir Menang..")
+        print("Jawabannya:", self.jawaban)
         return False
       
       self.main()
